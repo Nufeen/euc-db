@@ -25,6 +25,10 @@ interface WeightFilter {
   max: number | null
 }
 
+interface SuspensionFilter {
+  enabled: boolean
+}
+
 const unitMap: Record<string, string> = {
   power_w: 'W',
   battery_wh: 'Wh',
@@ -63,6 +67,7 @@ function Table({ data }: TableProps) {
   })
   const [speedFilter, setSpeedFilter] = useState<SpeedFilter>({ min: null, max: null })
   const [weightFilter, setWeightFilter] = useState<WeightFilter>({ min: null, max: null })
+  const [suspensionFilter, setSuspensionFilter] = useState<SuspensionFilter>({ enabled: false })
 
   if (!data || data.length === 0) {
     return <p>No data</p>
@@ -98,6 +103,8 @@ function Table({ data }: TableProps) {
     if (typeof weight !== 'number') return false
     if (weightFilter.min !== null && weight < weightFilter.min) return false
     if (weightFilter.max !== null && weight > weightFilter.max) return false
+
+    if (suspensionFilter.enabled && row.suspension !== true) return false
 
     return true
   })
@@ -177,6 +184,15 @@ function Table({ data }: TableProps) {
           <tr className={styles.headerRow}>
             {columns.map((col) => (
               <th key={col} onClick={() => handleSort(col)} className={styles.sortableHeader}>
+                {col === 'suspension' ? (
+                  <input
+                    type="checkbox"
+                    checked={suspensionFilter.enabled}
+                    onChange={(e) => setSuspensionFilter({ enabled: e.target.checked })}
+                    onClick={(e) => e.stopPropagation()}
+                    title="Filter by suspension"
+                  />
+                ) : null}
                 {columnLabels[col] || col}
                 <span
                   className={sortConfig.column === col ? styles.sortIconActive : styles.sortIcon}

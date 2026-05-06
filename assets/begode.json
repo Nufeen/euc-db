@@ -53,7 +53,7 @@
     "power_w": 2500,
     "battery_wh": 1800,
     "voltage_v": 100.8,
-    "cell_model": "21700 (типоразмер)",
+    "cell_model": "21700",
     "suspension": false,
     "weight_kg": 25,
     "max_speed_kmh": 70,
