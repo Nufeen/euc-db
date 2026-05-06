@@ -47,6 +47,14 @@ const columnLabels: Record<string, string> = {
   range_km: 'Range',
 }
 
+function getSpeedBgColor(value: number, min: number, max: number): string {
+  const pct = (value - min) / (max - min)
+  if (pct >= 0.8) return 'var(--pico-color-green-600)'
+  if (pct >= 0.6) return 'var(--pico-color-green-700)'
+  if (pct >= 0.4) return 'var(--pico-color-green-800)'
+  return 'transparent'
+}
+
 function formatValue(value: string | number | boolean | null, unit: string | undefined): string {
   if (value === null || value === undefined) {
     return '—'
@@ -230,6 +238,19 @@ function Table({ data }: TableProps) {
                     <td key={col}>
                       {formatValue(value, unit)}
                       <span className={styles.mobileYear}> ({row.year})</span>
+                    </td>
+                  )
+                }
+
+                if (col === 'max_speed_kmh' && typeof value === 'number') {
+                  return (
+                    <td
+                      key={col}
+                      style={{
+                        backgroundColor: getSpeedBgColor(value, globalMinSpeed, globalMaxSpeed),
+                      }}
+                    >
+                      {formatValue(value, unit)}
                     </td>
                   )
                 }
