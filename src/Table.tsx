@@ -150,26 +150,28 @@ function Table({ data }: TableProps) {
 
   return (
     <div className={styles.container}>
-      <div className={styles.filterRow}>
-        <RangeSlider
-          label="Max Speed"
-          min={globalMinSpeed}
-          max={globalMaxSpeed}
-          value={[effectiveMin, effectiveMax]}
-          onChange={handleSpeedFilterChange}
-        />
-        <RangeSlider
-          label="Weight"
-          min={globalMinWeight}
-          max={globalMaxWeight}
-          value={[effectiveWeightMin, effectiveWeightMax]}
-          onChange={handleWeightFilterChange}
-        />
+      <header>
+        <div className={styles.filterRow}>
+          <RangeSlider
+            label="Max Speed"
+            min={globalMinSpeed}
+            max={globalMaxSpeed}
+            value={[effectiveMin, effectiveMax]}
+            onChange={handleSpeedFilterChange}
+          />
+          <RangeSlider
+            label="Weight"
+            min={globalMinWeight}
+            max={globalMaxWeight}
+            value={[effectiveWeightMin, effectiveWeightMax]}
+            onChange={handleWeightFilterChange}
+          />
+        </div>
         <div className="pico-color-pink-500">
-          {' '}
           ⚠️ Data is gathered by robots and may contain errors
         </div>
-      </div>
+      </header>
+
       <table>
         <thead>
           <tr className={styles.headerRow}>
