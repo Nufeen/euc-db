@@ -8,14 +8,15 @@
   padding: 8px 0 12px;
   display: flex;
   justify-content: left;
-  gap:40px;
+  align-items: center;
+  gap: 40px;
 }
 
 .headerRow {
   position: sticky;
   top: 0px;
   margin-top: 40px;
-  background-color: white;
+  background-color: var(--pico-color-white);
   z-index: 1;
 }
 

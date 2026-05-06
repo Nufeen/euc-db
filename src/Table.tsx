@@ -48,7 +48,7 @@ function formatValue(value: string | number | boolean | null, unit: string | und
     return '—'
   }
   if (typeof value === 'boolean') {
-    return value ? 'Yes' : 'No'
+    return value ? '✅' : '—'
   }
   if (typeof value === 'number' && unit) {
     return `${value} ${unit}`
@@ -162,6 +162,10 @@ function Table({ data }: TableProps) {
           value={[effectiveWeightMin, effectiveWeightMax]}
           onChange={handleWeightFilterChange}
         />
+        <div className="pico-color-pink-500">
+          {' '}
+          ⚠️ Data is gathered by robots and may contain errors
+        </div>
       </div>
       <table>
         <thead>
