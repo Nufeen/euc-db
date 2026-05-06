@@ -57,7 +57,10 @@ function formatValue(value: string | number | boolean | null, unit: string | und
 }
 
 function Table({ data }: TableProps) {
-  const [sortConfig, setSortConfig] = useState<SortConfig>({ column: null, direction: 'asc' })
+  const [sortConfig, setSortConfig] = useState<SortConfig>({
+    column: 'model',
+    direction: 'asc',
+  })
   const [speedFilter, setSpeedFilter] = useState<SpeedFilter>({ min: null, max: null })
   const [weightFilter, setWeightFilter] = useState<WeightFilter>({ min: null, max: null })
 
