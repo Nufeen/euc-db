@@ -6,7 +6,9 @@
   top: 0;
   z-index: 2;
   padding: 8px 0 12px;
-  width: 300px;
+  display: flex;
+  justify-content: left;
+  gap:40px;
 }
 
 .headerRow {

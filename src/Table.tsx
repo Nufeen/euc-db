@@ -20,6 +20,11 @@ interface SpeedFilter {
   max: number | null
 }
 
+interface WeightFilter {
+  min: number | null
+  max: number | null
+}
+
 const unitMap: Record<string, string> = {
   power_w: 'W',
   battery_wh: 'Wh',
@@ -54,6 +59,7 @@ function formatValue(value: string | number | boolean | null, unit: string | und
 function Table({ data }: TableProps) {
   const [sortConfig, setSortConfig] = useState<SortConfig>({ column: null, direction: 'asc' })
   const [speedFilter, setSpeedFilter] = useState<SpeedFilter>({ min: null, max: null })
+  const [weightFilter, setWeightFilter] = useState<WeightFilter>({ min: null, max: null })
 
   if (!data || data.length === 0) {
     return <p>No data</p>
@@ -70,11 +76,26 @@ function Table({ data }: TableProps) {
   const effectiveMin = speedFilter.min ?? globalMinSpeed
   const effectiveMax = speedFilter.max ?? globalMaxSpeed
 
+  const weightValues = data
+    .filter((row) => typeof row.weight_kg === 'number')
+    .map((row) => row.weight_kg as number)
+  const globalMinWeight = weightValues.length > 0 ? Math.min(...weightValues) : 0
+  const globalMaxWeight = weightValues.length > 0 ? Math.max(...weightValues) : 100
+
+  const effectiveWeightMin = weightFilter.min ?? globalMinWeight
+  const effectiveWeightMax = weightFilter.max ?? globalMaxWeight
+
   const filteredData = data.filter((row) => {
     const speed = row.max_speed_kmh
     if (typeof speed !== 'number') return false
     if (speedFilter.min !== null && speed < speedFilter.min) return false
     if (speedFilter.max !== null && speed > speedFilter.max) return false
+
+    const weight = row.weight_kg
+    if (typeof weight !== 'number') return false
+    if (weightFilter.min !== null && weight < weightFilter.min) return false
+    if (weightFilter.max !== null && weight > weightFilter.max) return false
+
     return true
   })
 
@@ -117,6 +138,13 @@ function Table({ data }: TableProps) {
     })
   }
 
+  const handleWeightFilterChange = ([newMin, newMax]: [number, number]) => {
+    setWeightFilter({
+      min: newMin === globalMinWeight ? null : newMin,
+      max: newMax === globalMaxWeight ? null : newMax,
+    })
+  }
+
   return (
     <div className={styles.container}>
       <div className={styles.filterRow}>
@@ -126,6 +154,13 @@ function Table({ data }: TableProps) {
           max={globalMaxSpeed}
           value={[effectiveMin, effectiveMax]}
           onChange={handleSpeedFilterChange}
+        />
+        <RangeSlider
+          label="Weight"
+          min={globalMinWeight}
+          max={globalMaxWeight}
+          value={[effectiveWeightMin, effectiveWeightMax]}
+          onChange={handleWeightFilterChange}
         />
       </div>
       <table>
