@@ -1,0 +1,54 @@
+[
+  {
+    "model": "Ninebot One",
+    "year": 2015,
+    "power_w": 800,
+    "battery_wh": 320,
+    "voltage_v": 51.8,
+    "cell_model": null,
+    "suspension": false,
+    "weight_kg": 13.2,
+    "max_speed_kmh": 22,
+    "range_km": 30,
+    "diameter_inch": 14
+  },
+  {
+    "model": "Ninebot S2 (Авиаколесо)",
+    "year": 2018,
+    "power_w": 800,
+    "battery_wh": 318,
+    "voltage_v": 51.8,
+    "cell_model": null,
+    "suspension": false,
+    "weight_kg": 11.4,
+    "max_speed_kmh": 25,
+    "range_km": 30,
+    "diameter_inch": 14
+  },
+  {
+    "model": "Ninebot Z6",
+    "year": 2019,
+    "power_w": 800,
+    "battery_wh": 318,
+    "voltage_v": 51.8,
+    "cell_model": null,
+    "suspension": false,
+    "weight_kg": 13.2,
+    "max_speed_kmh": 30,
+    "range_km": 35,
+    "diameter_inch": 16
+  },
+  {
+    "model": "Ninebot Z10",
+    "year": 2018,
+    "power_w": 3000,
+    "battery_wh": 1488,
+    "voltage_v": 51.8,
+    "cell_model": "Panasonic NCR18650GA",
+    "suspension": false,
+    "weight_kg": 23.5,
+    "max_speed_kmh": 45,
+    "range_km": 90,
+    "diameter_inch": 16
+  }
+]

@@ -1,0 +1,41 @@
+[
+  {
+    "model": "Aero",
+    "year": 2023,
+    "power_w": 4000,
+    "battery_wh": 1600,
+    "voltage_v": 84,
+    "cell_model": "Samsung 50S",
+    "suspension": false,
+    "weight_kg": 22,
+    "max_speed_kmh": 80,
+    "range_km": 90,
+    "diameter_inch": 14
+  },
+  {
+    "model": "Aeon",
+    "year": 2024,
+    "power_w": 4000,
+    "battery_wh": 1600,
+    "voltage_v": 84,
+    "cell_model": "Samsung 50S",
+    "suspension": true,
+    "weight_kg": 25,
+    "max_speed_kmh": 80,
+    "range_km": 85,
+    "diameter_inch": 14
+  },
+  {
+    "model": "Apex",
+    "year": 2024,
+    "power_w": 5000,
+    "battery_wh": 2400,
+    "voltage_v": 100.8,
+    "cell_model": "Samsung 50S",
+    "suspension": true,
+    "weight_kg": 31,
+    "max_speed_kmh": 100,
+    "range_km": 130,
+    "diameter_inch": 16
+  }
+]

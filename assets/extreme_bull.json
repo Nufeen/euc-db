@@ -1,0 +1,93 @@
+[
+  {
+    "model": "Sherman",
+    "year": 2020,
+    "power_w": 2200,
+    "battery_wh": 2170,
+    "voltage_v": 100.8,
+    "cell_model": "Panasonic NCR20700C",
+    "suspension": false,
+    "weight_kg": 26,
+    "max_speed_kmh": 65,
+    "range_km": 130,
+    "diameter_inch": 16
+  },
+  {
+    "model": "Sherman-S",
+    "year": 2022,
+    "power_w": 2800,
+    "battery_wh": 2028,
+    "voltage_v": 100.8,
+    "cell_model": "Samsung 50E",
+    "suspension": false,
+    "weight_kg": 26,
+    "max_speed_kmh": 70,
+    "range_km": 130,
+    "diameter_inch": 16
+  },
+  {
+    "model": "Sherman L",
+    "year": 2023,
+    "power_w": 3000,
+    "battery_wh": 3200,
+    "voltage_v": 100.8,
+    "cell_model": "Samsung 50S",
+    "suspension": false,
+    "weight_kg": 27,
+    "max_speed_kmh": 70,
+    "range_km": 180,
+    "diameter_inch": 16
+  },
+  {
+    "model": "Sherman TCL",
+    "year": 2024,
+    "power_w": 2000,
+    "battery_wh": 1500,
+    "voltage_v": 100.8,
+    "cell_model": null,
+    "suspension": false,
+    "weight_kg": 24,
+    "max_speed_kmh": 60,
+    "range_km": 100,
+    "diameter_inch": 16
+  },
+  {
+    "model": "Patton",
+    "year": 2023,
+    "power_w": 3000,
+    "battery_wh": 2028,
+    "voltage_v": 100.8,
+    "cell_model": "Samsung 50E",
+    "suspension": true,
+    "weight_kg": 30,
+    "max_speed_kmh": 70,
+    "range_km": 120,
+    "diameter_inch": 14
+  },
+  {
+    "model": "Abrams",
+    "year": 2023,
+    "power_w": 4500,
+    "battery_wh": 3600,
+    "voltage_v": 126,
+    "cell_model": "Samsung 50S",
+    "suspension": true,
+    "weight_kg": 38,
+    "max_speed_kmh": 90,
+    "range_km": 180,
+    "diameter_inch": 20
+  },
+  {
+    "model": "Lynx",
+    "year": 2024,
+    "power_w": 2800,
+    "battery_wh": 1680,
+    "voltage_v": 100.8,
+    "cell_model": null,
+    "suspension": true,
+    "weight_kg": 24,
+    "max_speed_kmh": 60,
+    "range_km": 100,
+    "diameter_inch": 12.5
+  }
+]

@@ -251,5 +251,44 @@
     "weight_kg": 52,
     "max_speed_kmh": null,
     "range_km": null
+  },
+  {
+    "model": "Master",
+    "year": 2022,
+    "power_w": 3000,
+    "battery_wh": 2024,
+    "voltage_v": 100.8,
+    "cell_model": "LG M50T",
+    "suspension": false,
+    "weight_kg": 32,
+    "max_speed_kmh": 80,
+    "range_km": 160,
+    "diameter_inch": 18
+  },
+  {
+    "model": "Blitz",
+    "year": 2021,
+    "power_w": 4500,
+    "battery_wh": 2700,
+    "voltage_v": 100.8,
+    "cell_model": "LG M50T",
+    "suspension": false,
+    "weight_kg": 36,
+    "max_speed_kmh": 90,
+    "range_km": 140,
+    "diameter_inch": 18
+  },
+  {
+    "model": "Hero",
+    "year": 2023,
+    "power_w": 3000,
+    "battery_wh": 2400,
+    "voltage_v": 134.4,
+    "cell_model": "Samsung 50E",
+    "suspension": true,
+    "weight_kg": 34.5,
+    "max_speed_kmh": 90,
+    "range_km": 130,
+    "diameter_inch": 16
   }
 ]
