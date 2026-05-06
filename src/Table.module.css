@@ -1,0 +1,50 @@
+.container {
+  position: relative;
+}
+
+.filterRow {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  padding: 8px 0;
+  height: 40px;
+  width: 300px;
+}
+
+.headerRow {
+  position: sticky;
+  top: 40px;
+  margin-top: 40px;
+  background-color: white;
+  z-index: 1;
+}
+
+.sortableHeader {
+  cursor: pointer;
+}
+
+.sortIcon {
+  opacity: 0.3;
+}
+
+.sortIcon.active {
+  opacity: 1;
+}
+
+.speedFilter {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.speedFilter input {
+  flex: 1;
+}
+
+.speedFilter button {
+  font-size: 12px;
+}
+
+.filterTable {
+  width: 100%;
+}

@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import styles from './Table.module.css'
 
 interface BegodeItem {
   [key: string]: string | number | boolean | null
@@ -11,6 +12,11 @@ interface TableProps {
 interface SortConfig {
   column: string | null
   direction: 'asc' | 'desc'
+}
+
+interface SpeedFilter {
+  min: number | null
+  max: number | null
 }
 
 const unitMap: Record<string, string> = {
@@ -46,6 +52,7 @@ function formatValue(value: string | number | boolean | null, unit: string | und
 
 function Table({ data }: TableProps) {
   const [sortConfig, setSortConfig] = useState<SortConfig>({ column: null, direction: 'asc' })
+  const [speedFilter, setSpeedFilter] = useState<SpeedFilter>({ min: null, max: null })
 
   if (!data || data.length === 0) {
     return <p>No data</p>
@@ -53,7 +60,20 @@ function Table({ data }: TableProps) {
 
   const columns = Object.keys(data[0])
 
-  const sortedData = [...data]
+  const maxSpeedValues = data
+    .filter((row) => typeof row.max_speed_kmh === 'number')
+    .map((row) => row.max_speed_kmh as number)
+  const globalMaxSpeed = maxSpeedValues.length > 0 ? Math.max(...maxSpeedValues) : 100
+
+  const filteredData = data.filter((row) => {
+    const speed = row.max_speed_kmh
+    if (typeof speed !== 'number') return false
+    if (speedFilter.min !== null && speed < speedFilter.min) return false
+    if (speedFilter.max !== null && speed > speedFilter.max) return false
+    return true
+  })
+
+  const sortedData = [...filteredData]
   if (sortConfig.column) {
     sortedData.sort((a, b) => {
       const aVal = a[sortConfig.column!]
@@ -85,36 +105,51 @@ function Table({ data }: TableProps) {
     return sortConfig.direction === 'asc' ? ' ↑' : ' ↓'
   }
 
-  const getSortIconStyle = (column: string) => {
-    return {
-      opacity: sortConfig.column === column ? 1 : 0.3,
-    }
+  const handleSpeedFilterChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSpeedFilter({ min: null, max: Number(e.target.value) || null })
   }
 
   return (
-    <table>
-      <thead>
-        <tr>
-          {columns.map((col) => (
-            <th key={col} onClick={() => handleSort(col)} style={{ cursor: 'pointer' }}>
-              {columnLabels[col] || col}
-              <span style={getSortIconStyle(col)}>{getSortIcon(col)}</span>
-            </th>
-          ))}
-        </tr>
-      </thead>
-      <tbody>
-        {sortedData.map((row, idx) => (
-          <tr key={idx}>
-            {columns.map((col) => {
-              const unit = unitMap[col]
-              const value = row[col]
-              return <td key={col}>{formatValue(value, unit)}</td>
-            })}
+    <div className={styles.container}>
+      <div className={styles.filterRow}>
+        <div className={styles.speedFilter}>
+          <input
+            type="range"
+            min={0}
+            max={globalMaxSpeed}
+            value={speedFilter.max ?? globalMaxSpeed}
+            onChange={handleSpeedFilterChange}
+          />
+        </div>
+      </div>
+      <table>
+        <thead>
+          <tr className={styles.headerRow}>
+            {columns.map((col) => (
+              <th key={col} onClick={() => handleSort(col)} className={styles.sortableHeader}>
+                {columnLabels[col] || col}
+                <span
+                  className={sortConfig.column === col ? styles.sortIconActive : styles.sortIcon}
+                >
+                  {getSortIcon(col)}
+                </span>
+              </th>
+            ))}
           </tr>
-        ))}
-      </tbody>
-    </table>
+        </thead>
+        <tbody>
+          {sortedData.map((row, idx) => (
+            <tr key={idx}>
+              {columns.map((col) => {
+                const unit = unitMap[col]
+                const value = row[col]
+                return <td key={col}>{formatValue(value, unit)}</td>
+              })}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
   )
 }
 
