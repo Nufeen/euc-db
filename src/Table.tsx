@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import styles from './Table.module.css'
 
 interface BegodeItem {
@@ -37,6 +37,79 @@ const columnLabels: Record<string, string> = {
   range_km: 'Range',
 }
 
+function RangeSlider({
+  label,
+  min,
+  max,
+  value,
+  onChange,
+}: {
+  label: string
+  min: number
+  max: number
+  value: [number, number]
+  onChange: (value: [number, number]) => void
+}) {
+  const trackRef = useRef<HTMLDivElement>(null)
+  const [minVal, maxVal] = value
+
+  const toPercent = (v: number) => ((v - min) / (max - min)) * 100
+
+  const getValueFromX = (clientX: number) => {
+    const track = trackRef.current
+    if (!track) return 0
+    const rect = track.getBoundingClientRect()
+    const ratio = Math.max(0, Math.min(1, (clientX - rect.left) / rect.width))
+    return Math.round(min + ratio * (max - min))
+  }
+
+  const handlePointerDown = (thumb: 'min' | 'max') => (e: React.PointerEvent) => {
+    e.preventDefault()
+    const onMove = (ev: PointerEvent) => {
+      const v = getValueFromX(ev.clientX)
+      if (thumb === 'min') {
+        onChange([Math.min(Math.max(v, min), maxVal), maxVal])
+      } else {
+        onChange([minVal, Math.max(Math.min(v, max), minVal)])
+      }
+    }
+    const onUp = () => {
+      window.removeEventListener('pointermove', onMove)
+      window.removeEventListener('pointerup', onUp)
+    }
+    window.addEventListener('pointermove', onMove)
+    window.addEventListener('pointerup', onUp)
+  }
+
+  return (
+    <div className={styles.rangeSlider}>
+      <span className={styles.rangeSliderLabel}>{label}</span>
+      <div className={styles.rangeSliderTrack} ref={trackRef}>
+        <div
+          className={styles.rangeSliderFill}
+          style={{
+            left: `${toPercent(minVal)}%`,
+            width: `${toPercent(maxVal) - toPercent(minVal)}%`,
+          }}
+        />
+        {(['min', 'max'] as const).map((thumb) => {
+          const val = thumb === 'min' ? minVal : maxVal
+          return (
+            <div
+              key={thumb}
+              className={styles.rangeSliderThumb}
+              style={{ left: `${toPercent(val)}%` }}
+              onPointerDown={handlePointerDown(thumb)}
+            >
+              <span className={styles.rangeSliderValue}>{val}</span>
+            </div>
+          )
+        })}
+      </div>
+    </div>
+  )
+}
+
 function formatValue(value: string | number | boolean | null, unit: string | undefined): string {
   if (value === null || value === undefined) {
     return '—'
@@ -63,7 +136,11 @@ function Table({ data }: TableProps) {
   const maxSpeedValues = data
     .filter((row) => typeof row.max_speed_kmh === 'number')
     .map((row) => row.max_speed_kmh as number)
+  const globalMinSpeed = maxSpeedValues.length > 0 ? Math.min(...maxSpeedValues) : 0
   const globalMaxSpeed = maxSpeedValues.length > 0 ? Math.max(...maxSpeedValues) : 100
+
+  const effectiveMin = speedFilter.min ?? globalMinSpeed
+  const effectiveMax = speedFilter.max ?? globalMaxSpeed
 
   const filteredData = data.filter((row) => {
     const speed = row.max_speed_kmh
@@ -105,22 +182,23 @@ function Table({ data }: TableProps) {
     return sortConfig.direction === 'asc' ? ' ↑' : ' ↓'
   }
 
-  const handleSpeedFilterChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSpeedFilter({ min: null, max: Number(e.target.value) || null })
+  const handleSpeedFilterChange = ([newMin, newMax]: [number, number]) => {
+    setSpeedFilter({
+      min: newMin === globalMinSpeed ? null : newMin,
+      max: newMax === globalMaxSpeed ? null : newMax,
+    })
   }
 
   return (
     <div className={styles.container}>
       <div className={styles.filterRow}>
-        <div className={styles.speedFilter}>
-          <input
-            type="range"
-            min={0}
-            max={globalMaxSpeed}
-            value={speedFilter.max ?? globalMaxSpeed}
-            onChange={handleSpeedFilterChange}
-          />
-        </div>
+        <RangeSlider
+          label="Max Speed"
+          min={globalMinSpeed}
+          max={globalMaxSpeed}
+          value={[effectiveMin, effectiveMax]}
+          onChange={handleSpeedFilterChange}
+        />
       </div>
       <table>
         <thead>

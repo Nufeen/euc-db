@@ -3,17 +3,15 @@
 }
 
 .filterRow {
-  position: sticky;
   top: 0;
   z-index: 2;
-  padding: 8px 0;
-  height: 40px;
+  padding: 8px 0 12px;
   width: 300px;
 }
 
 .headerRow {
   position: sticky;
-  top: 40px;
+  top: 0px;
   margin-top: 40px;
   background-color: white;
   z-index: 1;
@@ -31,18 +29,67 @@
   opacity: 1;
 }
 
-.speedFilter {
+.rangeSlider {
   display: flex;
-  align-items: center;
-  gap: 8px;
+  flex-direction: column;
+  gap: 4px;
 }
 
-.speedFilter input {
-  flex: 1;
+.rangeSliderLabel {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #888;
 }
 
-.speedFilter button {
-  font-size: 12px;
+.rangeSliderTrack {
+  position: relative;
+  height: 4px;
+  background: #e0e0e0;
+  border-radius: 2px;
+  margin-top: 22px;
+}
+
+.rangeSliderFill {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  background: #4a90e2;
+  border-radius: 2px;
+  pointer-events: none;
+}
+
+.rangeSliderThumb {
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 16px;
+  height: 16px;
+  background: white;
+  border: 2px solid #4a90e2;
+  border-radius: 50%;
+  cursor: grab;
+  touch-action: none;
+  user-select: none;
+  z-index: 1;
+}
+
+.rangeSliderThumb:active {
+  cursor: grabbing;
+  background: #e8f0fb;
+}
+
+.rangeSliderValue {
+  position: absolute;
+  bottom: calc(100% + 6px);
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 11px;
+  font-weight: 600;
+  color: #333;
+  white-space: nowrap;
+  pointer-events: none;
 }
 
 .filterTable {
