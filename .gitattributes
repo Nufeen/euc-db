@@ -1,0 +1,2 @@
+# Mark package-lock.json as binary to prevent merge conflicts
+package-lock.json binary
