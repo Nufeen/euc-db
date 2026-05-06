@@ -183,7 +183,15 @@ function Table({ data }: TableProps) {
         <thead>
           <tr className={styles.headerRow}>
             {columns.map((col) => (
-              <th key={col} onClick={() => handleSort(col)} className={styles.sortableHeader}>
+              <th
+                key={col}
+                onClick={() => handleSort(col)}
+                className={`${styles.sortableHeader} ${
+                  ['cell_model', 'year', 'suspension', 'voltage_v', 'power_w'].includes(col)
+                    ? styles.hideOnMobile
+                    : ''
+                }`}
+              >
                 {col === 'suspension' ? (
                   <input
                     type="checkbox"
@@ -209,7 +217,28 @@ function Table({ data }: TableProps) {
               {columns.map((col) => {
                 const unit = unitMap[col]
                 const value = row[col]
-                return <td key={col}>{formatValue(value, unit)}</td>
+                const isMobileHidden = [
+                  'cell_model',
+                  'year',
+                  'suspension',
+                  'voltage_v',
+                  'power_w',
+                ].includes(col)
+
+                if (col === 'model') {
+                  return (
+                    <td key={col}>
+                      {formatValue(value, unit)}
+                      <span className={styles.mobileYear}> ({row.year})</span>
+                    </td>
+                  )
+                }
+
+                return (
+                  <td key={col} className={isMobileHidden ? styles.hideOnMobile : ''}>
+                    {formatValue(value, unit)}
+                  </td>
+                )
               })}
             </tr>
           ))}

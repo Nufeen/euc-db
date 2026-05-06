@@ -3,6 +3,17 @@ header {
   justify-content: space-between;
 }
 
+@media (max-width: 900px) {
+  header {
+    display: block;
+    padding-bottom: 10px;
+  }
+  
+  header > div:last-of-type {
+    margin-top: 10px;
+  }
+}
+
 .container {
   position: relative;
 }
@@ -10,7 +21,7 @@ header {
 .filterRow {
   top: 0;
   z-index: 2;
-  padding: 8px 0 12px;
+  padding: 8px 7px 12px;
   display: flex;
   justify-content: left;
   align-items: center;
@@ -39,4 +50,22 @@ header {
 
 .filterTable {
   width: 100%;
+}
+
+.mobileYear {
+  display: none;
+}
+
+
+@media (max-width: 900px) {
+  .hideOnMobile {
+    display: none;
+  }
+
+  .mobileYear {
+    display: inline;
+    
+    font-size: .7em;
+    opacity: .7;
+  }
 }
