@@ -55,6 +55,16 @@ function getSpeedBgColor(value: number, min: number, max: number): string {
   return 'transparent'
 }
 
+function getWeightBgColor(value: number, min: number, max: number): string {
+  const pct = (value - min) / (max - min)
+  if (pct >= 0.9) return 'var(--pico-color-red-600)'
+  if (pct >= 0.8) return 'var(--pico-color-red-700)'
+  if (pct >= 0.7) return 'var(--pico-color-red-800)'
+  if (pct >= 0.6) return 'var(--pico-color-red-800)'
+
+  return 'transparent'
+}
+
 function formatValue(value: string | number | boolean | null, unit: string | undefined): string {
   if (value === null || value === undefined) {
     return '—'
@@ -248,6 +258,20 @@ function Table({ data }: TableProps) {
                       key={col}
                       style={{
                         backgroundColor: getSpeedBgColor(value, globalMinSpeed, globalMaxSpeed),
+                      }}
+                    >
+                      {formatValue(value, unit)}
+                    </td>
+                  )
+                }
+
+                if (col === 'weight_kg' && typeof value === 'number') {
+                  return (
+                    <td
+                      key={col}
+                      className={isMobileHidden ? styles.hideOnMobile : ''}
+                      style={{
+                        backgroundColor: getWeightBgColor(value, globalMinWeight, globalMaxWeight),
                       }}
                     >
                       {formatValue(value, unit)}
