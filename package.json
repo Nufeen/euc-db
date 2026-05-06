@@ -8,9 +8,11 @@
     "build": "tsc -b && vite build",
     "preview": "vite preview",
     "test": "vitest",
+    "test:watch": "vitest --watch",
     "lint": "eslint src --ext .ts,.tsx",
     "format": "prettier --write src",
     "typecheck": "tsc --noEmit",
+    "typecheck:watch": "tsc --noEmit --watch",
     "prepare": "husky"
   },
   "lint-staged": {
