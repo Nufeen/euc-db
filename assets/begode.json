@@ -9,7 +9,8 @@
     "suspension": false,
     "weight_kg": 13.2,
     "max_speed_kmh": 20,
-    "range_km": 14
+    "range_km": 14,
+    "diameter_inch": 14
   },
   {
     "model": "Future",
@@ -21,7 +22,8 @@
     "suspension": false,
     "weight_kg": 16.8,
     "max_speed_kmh": 44,
-    "range_km": 20
+    "range_km": 20,
+    "diameter_inch": 14
   },
   {
     "model": "Monster",
@@ -33,7 +35,8 @@
     "suspension": false,
     "weight_kg": 32.5,
     "max_speed_kmh": 55,
-    "range_km": 180
+    "range_km": 180,
+    "diameter_inch": 22
   },
   {
     "model": "A5",
@@ -45,7 +48,8 @@
     "suspension": false,
     "weight_kg": 23,
     "max_speed_kmh": 44,
-    "range_km": 80
+    "range_km": 80,
+    "diameter_inch": 15
   },
   {
     "model": "MSuper PRO",
@@ -53,11 +57,12 @@
     "power_w": 2500,
     "battery_wh": 1800,
     "voltage_v": 100.8,
-    "cell_model": "21700",
+    "cell_model": "21700 (типоразмер)",
     "suspension": false,
     "weight_kg": 25,
     "max_speed_kmh": 70,
-    "range_km": 125
+    "range_km": 125,
+    "diameter_inch": 19
   },
   {
     "model": "RS HS",
@@ -69,7 +74,8 @@
     "suspension": false,
     "weight_kg": 27,
     "max_speed_kmh": 75,
-    "range_km": 125
+    "range_km": 125,
+    "diameter_inch": 19
   },
   {
     "model": "EX / EX N",
@@ -81,7 +87,8 @@
     "suspension": false,
     "weight_kg": 38,
     "max_speed_kmh": 70,
-    "range_km": 150
+    "range_km": 150,
+    "diameter_inch": 19
   },
   {
     "model": "Nikola Plus",
@@ -93,7 +100,8 @@
     "suspension": false,
     "weight_kg": 25.6,
     "max_speed_kmh": 60,
-    "range_km": 170
+    "range_km": 170,
+    "diameter_inch": 17
   },
   {
     "model": "A2",
@@ -105,7 +113,8 @@
     "suspension": false,
     "weight_kg": 21.8,
     "max_speed_kmh": 42.5,
-    "range_km": 50
+    "range_km": 50,
+    "diameter_inch": 15
   },
   {
     "model": "Monster 3",
@@ -117,7 +126,8 @@
     "suspension": false,
     "weight_kg": 28,
     "max_speed_kmh": 70,
-    "range_km": 180
+    "range_km": 180,
+    "diameter_inch": 22
   },
   {
     "model": "Monster Pro",
@@ -129,7 +139,8 @@
     "suspension": false,
     "weight_kg": 39.5,
     "max_speed_kmh": 85,
-    "range_km": 250
+    "range_km": 250,
+    "diameter_inch": 24
   },
   {
     "model": "MTEN / Mten4",
@@ -141,7 +152,8 @@
     "suspension": false,
     "weight_kg": 13,
     "max_speed_kmh": 40,
-    "range_km": 35
+    "range_km": 35,
+    "diameter_inch": 11
   },
   {
     "model": "EX30",
@@ -153,7 +165,8 @@
     "suspension": true,
     "weight_kg": 46.7,
     "max_speed_kmh": 100,
-    "range_km": 150
+    "range_km": 150,
+    "diameter_inch": 20
   },
   {
     "model": "Falcon",
@@ -165,7 +178,8 @@
     "suspension": true,
     "weight_kg": 25,
     "max_speed_kmh": 50,
-    "range_km": 70
+    "range_km": 70,
+    "diameter_inch": 15
   },
   {
     "model": "ET Max",
@@ -177,7 +191,8 @@
     "suspension": true,
     "weight_kg": 49,
     "max_speed_kmh": 120,
-    "range_km": 140
+    "range_km": 140,
+    "diameter_inch": 20
   },
   {
     "model": "RACE",
@@ -189,7 +204,8 @@
     "suspension": true,
     "weight_kg": 46.3,
     "max_speed_kmh": 120,
-    "range_km": 190
+    "range_km": 190,
+    "diameter_inch": 20
   },
   {
     "model": "Panther",
@@ -201,9 +217,9 @@
     "suspension": true,
     "weight_kg": 52.6,
     "max_speed_kmh": 100,
-    "range_km": null
+    "range_km": null,
+    "diameter_inch": 22
   },
-
   {
     "model": "C8",
     "year": 2025,
@@ -214,7 +230,8 @@
     "suspension": true,
     "weight_kg": 31,
     "max_speed_kmh": 65,
-    "range_km": 85
+    "range_km": 85,
+    "diameter_inch": 15
   },
   {
     "model": "X-Way",
@@ -226,7 +243,8 @@
     "suspension": true,
     "weight_kg": 39,
     "max_speed_kmh": null,
-    "range_km": 75
+    "range_km": 75,
+    "diameter_inch": 20
   },
   {
     "model": "T4",
@@ -238,7 +256,8 @@
     "suspension": true,
     "weight_kg": 32,
     "max_speed_kmh": 66.5,
-    "range_km": 125
+    "range_km": 125,
+    "diameter_inch": 12
   },
   {
     "model": "X MAX",
@@ -250,7 +269,21 @@
     "suspension": true,
     "weight_kg": 52,
     "max_speed_kmh": null,
-    "range_km": null
+    "range_km": null,
+    "diameter_inch": 20
+  },
+  {
+    "model": "Mten5",
+    "year": 2025,
+    "power_w": 1200,
+    "battery_wh": 750,
+    "voltage_v": 84,
+    "cell_model": null,
+    "suspension": false,
+    "weight_kg": 18.5,
+    "max_speed_kmh": 71,
+    "range_km": 55,
+    "diameter_inch": 12
   },
   {
     "model": "Master",

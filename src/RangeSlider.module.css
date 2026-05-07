@@ -5,6 +5,12 @@
   width: 150px;
 }
 
+@media (max-width: 900px) {
+  .rangeSlider {
+    width: min(150px, 40%);
+  }
+}
+
 .rangeSliderLabel {
   font-size: 11px;
   font-weight: 600;

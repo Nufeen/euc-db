@@ -36,6 +36,7 @@ const unitMap: Record<string, string> = {
   weight_kg: 'kg',
   max_speed_kmh: 'km/h',
   range_km: 'km',
+  diameter_inch: '"',
 }
 
 const columnLabels: Record<string, string> = {
@@ -45,6 +46,7 @@ const columnLabels: Record<string, string> = {
   weight_kg: 'Weight',
   max_speed_kmh: 'Max Speed',
   range_km: 'Range',
+  diameter_inch: 'Diameter',
 }
 
 function getSpeedBgColor(value: number, min: number, max: number): string {
@@ -175,6 +177,15 @@ function Table({ data }: TableProps) {
       max: newMax === globalMaxWeight ? null : newMax,
     })
   }
+  const H = [
+    'cell_model',
+    'year',
+    'suspension',
+    'voltage_v',
+    'power_w',
+    'range_km',
+    'diameter_inch',
+  ]
 
   return (
     <div className={styles.container}>
@@ -207,11 +218,7 @@ function Table({ data }: TableProps) {
               <th
                 key={col}
                 onClick={() => handleSort(col)}
-                className={`${styles.sortableHeader} ${
-                  ['cell_model', 'year', 'suspension', 'voltage_v', 'power_w'].includes(col)
-                    ? styles.hideOnMobile
-                    : ''
-                }`}
+                className={`${styles.sortableHeader} ${H.includes(col) ? styles.hideOnMobile : ''}`}
               >
                 {col === 'suspension' ? (
                   <input
@@ -238,18 +245,12 @@ function Table({ data }: TableProps) {
               {columns.map((col) => {
                 const unit = unitMap[col]
                 const value = row[col]
-                const isMobileHidden = [
-                  'cell_model',
-                  'year',
-                  'suspension',
-                  'voltage_v',
-                  'power_w',
-                ].includes(col)
+                const isMobileHidden = H.includes(col)
 
                 if (col === 'model') {
                   return (
                     <td key={col}>
-                      {formatValue(value, unit)}
+                      {row.model}
                       <span className={styles.mobileYear}> ({row.year})</span>
                     </td>
                   )
