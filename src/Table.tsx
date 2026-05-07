@@ -2,9 +2,11 @@ import { useState } from 'react'
 import styles from './Table.module.css'
 import RangeSlider from './RangeSlider'
 import chats from '../assets/chats.json'
+import notes from '../assets/notes.json'
 import tgIcon from '../assets/tg.svg'
 
 type ChatsData = Record<string, Record<string, { tg: string[] }>>
+type NotesData = Record<string, Record<string, string>>
 
 interface BegodeItem {
   [key: string]: string | number | boolean | null | undefined
@@ -95,12 +97,14 @@ function Table({ data }: TableProps) {
   const [speedFilter, setSpeedFilter] = useState<SpeedFilter>({ min: null, max: null })
   const [weightFilter, setWeightFilter] = useState<WeightFilter>({ min: null, max: null })
   const [suspensionFilter, setSuspensionFilter] = useState<SuspensionFilter>({ enabled: false })
+  const [showNotes, setShowNotes] = useState(false)
 
   if (!data || data.length === 0) {
     return <p>No data</p>
   }
 
   const columns = Object.keys(data[0])
+  const visibleColumns = columns.filter((c) => !c.startsWith('_'))
 
   const maxSpeedValues = data
     .filter((row) => typeof row.max_speed_kmh === 'number')
@@ -218,46 +222,57 @@ function Table({ data }: TableProps) {
       <table>
         <thead>
           <tr className={styles.headerRow}>
-            {columns
-              .filter((c) => !c.startsWith('_'))
-              .map((col) => (
-                <th
-                  key={col}
-                  onClick={() => handleSort(col)}
-                  className={`${styles.sortableHeader} ${H.includes(col) ? styles.hideOnMobile : ''}`}
-                >
-                  {col === 'suspension' ? (
-                    <input
-                      type="checkbox"
-                      checked={suspensionFilter.enabled}
-                      onChange={(e) => setSuspensionFilter({ enabled: e.target.checked })}
-                      onClick={(e) => e.stopPropagation()}
-                      title="Filter by suspension"
-                    />
-                  ) : null}
-                  {columnLabels[col] || col}
-                  <span
-                    className={sortConfig.column === col ? styles.sortIconActive : styles.sortIcon}
+            {visibleColumns.map((col) => (
+              <th
+                key={col}
+                onClick={() => handleSort(col)}
+                className={`${styles.sortableHeader} ${H.includes(col) ? styles.hideOnMobile : ''}`}
+              >
+                {col === 'suspension' ? (
+                  <input
+                    type="checkbox"
+                    checked={suspensionFilter.enabled}
+                    onChange={(e) => setSuspensionFilter({ enabled: e.target.checked })}
+                    onClick={(e) => e.stopPropagation()}
+                    title="Filter by suspension"
+                  />
+                ) : null}
+                {col === 'range_km' ? (
+                  <button
+                    className={`${styles.notesToggle} ${showNotes ? styles.notesToggleActive : ''}`}
+                    onClick={(e) => {
+                      e.stopPropagation()
+                      setShowNotes((v) => !v)
+                    }}
+                    title="Toggle notes"
                   >
-                    {getSortIcon(col)}
-                  </span>
-                </th>
-              ))}
+                    ⚠️
+                  </button>
+                ) : null}
+                {columnLabels[col] || col}
+                <span
+                  className={sortConfig.column === col ? styles.sortIconActive : styles.sortIcon}
+                >
+                  {getSortIcon(col)}
+                </span>
+              </th>
+            ))}
           </tr>
         </thead>
         <tbody>
-          {sortedData.map((row, idx) => (
-            <tr key={idx}>
-              {columns
-                .filter((c) => !c.startsWith('_'))
-                .map((col) => {
+          {sortedData.flatMap((row, idx) => {
+            const brand = row._brand as string
+            const model = row._model as string
+            const note = (notes as NotesData)[brand.toLowerCase()]?.[model]
+
+            const dataRow = (
+              <tr key={`data-${idx}`}>
+                {visibleColumns.map((col) => {
                   const unit = unitMap[col]
                   const value = row[col]
                   const isMobileHidden = H.includes(col)
 
                   if (col === 'model') {
-                    const brand = row._brand as string
-                    const model = row._model as string
                     const tgLinks = (chats as ChatsData)[brand]?.[model]?.tg
 
                     return (
@@ -316,8 +331,18 @@ function Table({ data }: TableProps) {
                     </td>
                   )
                 })}
-            </tr>
-          ))}
+              </tr>
+            )
+
+            if (!note || !showNotes) return [dataRow]
+
+            return [
+              dataRow,
+              <tr key={`note-${idx}`} className={styles.noteRow}>
+                <td className={styles.noteCell}>{note}</td>
+              </tr>,
+            ]
+          })}
         </tbody>
       </table>
     </div>

@@ -90,10 +90,50 @@ tr {
   margin: 0 -1px;
 }
 
+.noteRow {
+  margin-top: -1px;
+}
+
+.noteCell {
+  font-size: 0.82em;
+  opacity: 0.75;
+  padding: 8px 8px 8px !important;
+  background: var(--pico-color-violet-950);
+}
+
+.notesToggle {
+  cursor: pointer;
+  background: none;
+  border: none;
+  font-size: 0.75em;
+  margin-right: 4px;
+  opacity: 0.4;
+  padding: 0;
+}
+
+.notesToggle:hover {
+  opacity: 0.8;
+}
+
+.notesToggleActive {
+  opacity: 0.8;
+}
+
 th,
 td {
   width: 100%;
   text-align: left;
+}
+
+th:first-child,
+td:first-child {
+  width: 200%;
+}
+
+th:nth-child(7),
+td:nth-child(7) {
+  width: 150%;
+  text-align: center;
 }
 
 @media (max-width: 900px) {
