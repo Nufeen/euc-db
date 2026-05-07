@@ -3,7 +3,7 @@ import styles from './Table.module.css'
 import RangeSlider from './RangeSlider'
 
 interface BegodeItem {
-  [key: string]: string | number | boolean | null
+  [key: string]: string | number | boolean | null | undefined
 }
 
 interface TableProps {
@@ -65,7 +65,10 @@ function getWeightBgColor(value: number, min: number, max: number): string {
   return 'transparent'
 }
 
-function formatValue(value: string | number | boolean | null, unit: string | undefined): string {
+function formatValue(
+  value: string | number | boolean | null | undefined,
+  unit: string | undefined,
+): string {
   if (value === null || value === undefined) {
     return '—'
   }
