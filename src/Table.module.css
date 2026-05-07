@@ -52,6 +52,23 @@ header {
   width: 100%;
 }
 
+.chatLink {
+  margin-left: 10px;
+  text-decoration: none;
+}
+
+.chatLink + .chatLink {
+  margin-left: 5px;
+  text-decoration: none;
+}
+
+.chatLink img {
+  vertical-align: middle;
+  display: inline;
+  opacity: 0.5;
+  width: 13px;
+}
+
 .mobileYear {
   display: none;
 }
@@ -66,6 +83,17 @@ header {
     font-size: 0.7em;
     opacity: 0.7;
   }
+}
+
+tr {
+  display: flex;
+  margin: 0 -1px;
+}
+
+th,
+td {
+  width: 100%;
+  text-align: left;
 }
 
 @media (max-width: 900px) {

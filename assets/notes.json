@@ -1,0 +1,26 @@
+{
+  "begode": {
+    "Falcon": "⚠️ 1500 W is a bit conservative vs typical 1500–1900 W nominal, and 50 km/h is a conservative “safe” speed.",
+    "Hero": "⚠️ 3000 W, 2400 Wh, and 90 km/h are plausible upper‑end values; real‑world range is often closer to 100–120 km than 130 km.",
+    "X‑Way": "⚠️ 75 km range is low vs typical 100–130 km claimed; power and speed marked as null is reasonable if truly unknown.",
+    "T4": "⚠️ 1800 Wh is very large for 12″; 125 km range is optimistic for that size wheel; 2500 W with 100 V is aggressive but possible.",
+    "X MAX": "⚠️ Listed as 6000 W, 4400 Wh, 252 V, 20″, but no official max‑speed or range; nulls are fine, but 252 V and 4400 Wh put this into extreme‑performance tier that needs firmware‑specific confirmation.",
+    "C8": "⚠️ 2500 W with 84 V, 1500 Wh, 15″, 65 km/h, and 85 km range is plausible upper‑end; 85 km range is on the high side for real‑world use.",
+    "Panther": "⚠️ 5000 W, 4400 Wh, 168 V, 22″, and 220 km claimed range is within Panther‑type specs; 100 km/h is a bit low vs common 110 km/h safe‑speed, and range marked null avoids optimistic math.",
+    "ET Max": "⚠️ 4500 W, 3000 Wh, 168 V, 20″, 120 km/h, and 140 km range is consistent; 140 km range is marketing‑figure, not everyday range.",
+    "RACE": "⚠️ 5000 W, 3800 Wh, 210 V, 20″, 120 km/h, and 190 km range is consistent; 190 km range is optimistic‑end but exists in specs.",
+    "EX30": "⚠️ 4000 W, 3600 Wh, 134.4 V, 20″, 100 km/h, and 150 km range is within known range; 150 km is an optimistic claimed value.",
+    "Master": "⚠️ 3000 W, 2024 Wh, 100.8 V, 18″, 80 km/h, 160 km range is plausible; 160 km is on the optimistic side.",
+    "Monster 3": "⚠️ 2500 W, 1865 Wh, 100 V, 22″, 70 km/h, and 180 km range is plausible; 70 km/h is on the low‑end of expected safe‑speed.",
+    "Monster Pro": "⚠️ 4000 W, 3600 Wh, 100 V, 24″, 85 km/h, and 250 km range is partially consistent; 250 km range is unrealistic (real‑world more like 120–160 km).",
+    "Blitz": "⚠️ 4500 W, 2700 Wh, 100.8 V, 18″, 90 km/h, and 140 km range is consistent; 140 km range is optimistic‑end but common in claims.",
+    "Nikola Plus": "⚠️ 2000 W, 1776 Wh, 100 V, 17″, 60 km/h, and 170 km range is plausible; 170 km range is optimistic and highly rider‑dependent."
+  },
+  "gotway": {
+    "MCM5": "⚠️ 840 Wh is higher than the more commonly listed 512 Wh; 800 Wh is also documented, so 840 Wh is either rounded or a custom pack.",
+    "MSuper V3": "⚠️ 2000 W, 1665 Wh, 84 V, 18″, 110 km range, 23.5 kg are plausible; 50 km/h is on the low side of typical safe‑speed (often 55–60 km/h).",
+    "Nikola": "⚠️ 1470 Wh is not a standard documented pack; Nikola usually uses 1600 / 1845 / 2100 Wh, so 1470 Wh is likely a hand‑tuned or custom value.",
+    "Tesla": "⚠️ 1020 Wh, 84 V, 16″, and 60 km range are in‑range; your 1500 W is a bit conservative vs ~1900 W nominal, and 45 km/h is a conservative “safe” speed.",
+    "Mten3": "⚠️ 800 W, 480 Wh, 42 V, 10″, 35 km/h, 30 km range, 10.5 kg are plausible; 30 km range is optimistic but acceptable as an upper‑bound figure."
+  }
+}

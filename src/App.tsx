@@ -40,11 +40,24 @@ function App() {
     nosfet: 'Nosfet',
   } as Record<string, string>
 
+  const chatBrand: Record<string, string> = {
+    begode: 'Begode',
+    gotway: 'Gotway',
+    kingsong: 'Kingsong',
+    veteran: 'Veteran',
+    extreme_bull: 'Extremebull',
+    ninebot: 'Ninebot',
+    inmotion: 'Inmotion',
+    nosfet: 'Nosfet',
+  }
+
   // Combine data from selected sources and add source information
   const combinedData = selectedSources.flatMap((source) => {
     return (dataSources[source] || []).map((item) => ({
       ...item,
       model: `${M[source]} ${item.model}`,
+      _brand: chatBrand[source],
+      _model: item.model,
     }))
   })
 

@@ -1,6 +1,10 @@
 import { useState } from 'react'
 import styles from './Table.module.css'
 import RangeSlider from './RangeSlider'
+import chats from '../assets/chats.json'
+import tgIcon from '../assets/tg.svg'
+
+type ChatsData = Record<string, Record<string, { tg: string[] }>>
 
 interface BegodeItem {
   [key: string]: string | number | boolean | null | undefined
@@ -214,81 +218,104 @@ function Table({ data }: TableProps) {
       <table>
         <thead>
           <tr className={styles.headerRow}>
-            {columns.map((col) => (
-              <th
-                key={col}
-                onClick={() => handleSort(col)}
-                className={`${styles.sortableHeader} ${H.includes(col) ? styles.hideOnMobile : ''}`}
-              >
-                {col === 'suspension' ? (
-                  <input
-                    type="checkbox"
-                    checked={suspensionFilter.enabled}
-                    onChange={(e) => setSuspensionFilter({ enabled: e.target.checked })}
-                    onClick={(e) => e.stopPropagation()}
-                    title="Filter by suspension"
-                  />
-                ) : null}
-                {columnLabels[col] || col}
-                <span
-                  className={sortConfig.column === col ? styles.sortIconActive : styles.sortIcon}
+            {columns
+              .filter((c) => !c.startsWith('_'))
+              .map((col) => (
+                <th
+                  key={col}
+                  onClick={() => handleSort(col)}
+                  className={`${styles.sortableHeader} ${H.includes(col) ? styles.hideOnMobile : ''}`}
                 >
-                  {getSortIcon(col)}
-                </span>
-              </th>
-            ))}
+                  {col === 'suspension' ? (
+                    <input
+                      type="checkbox"
+                      checked={suspensionFilter.enabled}
+                      onChange={(e) => setSuspensionFilter({ enabled: e.target.checked })}
+                      onClick={(e) => e.stopPropagation()}
+                      title="Filter by suspension"
+                    />
+                  ) : null}
+                  {columnLabels[col] || col}
+                  <span
+                    className={sortConfig.column === col ? styles.sortIconActive : styles.sortIcon}
+                  >
+                    {getSortIcon(col)}
+                  </span>
+                </th>
+              ))}
           </tr>
         </thead>
         <tbody>
           {sortedData.map((row, idx) => (
             <tr key={idx}>
-              {columns.map((col) => {
-                const unit = unitMap[col]
-                const value = row[col]
-                const isMobileHidden = H.includes(col)
+              {columns
+                .filter((c) => !c.startsWith('_'))
+                .map((col) => {
+                  const unit = unitMap[col]
+                  const value = row[col]
+                  const isMobileHidden = H.includes(col)
 
-                if (col === 'model') {
-                  return (
-                    <td key={col}>
-                      {row.model}
-                      <span className={styles.mobileYear}> ({row.year})</span>
-                    </td>
-                  )
-                }
+                  if (col === 'model') {
+                    const brand = row._brand as string
+                    const model = row._model as string
+                    const tgLinks = (chats as ChatsData)[brand]?.[model]?.tg
 
-                if (col === 'max_speed_kmh' && typeof value === 'number') {
+                    return (
+                      <td key={col}>
+                        {row.model}
+                        <span className={styles.mobileYear}> ({row.year})</span>
+                        {tgLinks?.map((url) => (
+                          <a
+                            key={url}
+                            href={url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className={styles.chatLink}
+                          >
+                            <img src={tgIcon} alt="" width="16" height="16" />
+                          </a>
+                        ))}
+                      </td>
+                    )
+                  }
+
+                  if (col === 'max_speed_kmh' && typeof value === 'number') {
+                    return (
+                      <td
+                        key={col}
+                        style={{
+                          backgroundColor: getSpeedBgColor(value, globalMinSpeed, globalMaxSpeed),
+                        }}
+                      >
+                        {formatValue(value, unit)}
+                      </td>
+                    )
+                  }
+
+                  if (col === 'weight_kg' && typeof value === 'number') {
+                    return (
+                      <td
+                        key={col}
+                        className={isMobileHidden ? styles.hideOnMobile : ''}
+                        style={{
+                          backgroundColor: getWeightBgColor(
+                            value,
+                            globalMinWeight,
+                            globalMaxWeight,
+                          ),
+                        }}
+                      >
+                        {formatValue(value, unit)}
+                      </td>
+                    )
+                  }
+
                   return (
-                    <td
-                      key={col}
-                      style={{
-                        backgroundColor: getSpeedBgColor(value, globalMinSpeed, globalMaxSpeed),
-                      }}
-                    >
+                    <td key={col} className={isMobileHidden ? styles.hideOnMobile : ''}>
                       {formatValue(value, unit)}
                     </td>
                   )
-                }
-
-                if (col === 'weight_kg' && typeof value === 'number') {
-                  return (
-                    <td
-                      key={col}
-                      className={isMobileHidden ? styles.hideOnMobile : ''}
-                      style={{
-                        backgroundColor: getWeightBgColor(value, globalMinWeight, globalMaxWeight),
-                      }}
-                    >
-                      {formatValue(value, unit)}
-                    </td>
-                  )
-                }
-
-                return (
-                  <td key={col} className={isMobileHidden ? styles.hideOnMobile : ''}>
-                    {formatValue(value, unit)}
-                  </td>
-                )
-              })}
+                })}
             </tr>
           ))}
         </tbody>
